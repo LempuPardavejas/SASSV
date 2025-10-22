@@ -1,0 +1,52 @@
+SUKURK INVENTORIAUS VALDYMO SISTEMĄ
+
+TIKSLAS: Pakeisti rankinį užrašymą į sąsiuvinius ultra greita skaitmenine sistema.
+
+AUKŠČIAUSIAS PRIORITETAS: 10 prekių per 15 sekundžių be pelės!
+
+WORKFLOW:
+1. Įvedi produktą (kodas/barkodas) → ENTER
+2. Auto-fokusas → kiekis
+3. Įvedi kiekį → ENTER
+4. Produktas pridėtas! Fokusas → paieška
+5. KARTOJI!
+
+STACK:
+- Backend: Node.js + Express + SQLite + JWT + bcrypt (Port 5000)
+- Frontend: React 18 + TypeScript + Vite + TailwindCSS (Port 5173)
+
+DUOMENYS:
+Users (username, password_hash, role: ADMIN|CLIENT, pin_hash)
+Companies (code, name, email)
+Products (code, barcode, name, unit, stock, price)
+Projects (company_id, name, status)
+Transactions (project_id, type: PAEMIMAS|GRAZINIMAS, items[], confirmed_by_pin)
+
+KRITINIAI KOMPONENTAI:
+- ProductSearchInput: real-time search, arrow nav, ENTER select
+- QuantityInput: auto-focus, ENTER submit
+- FastProductEntry: workflow + auto-focus management
+- PinModal: 4 digit PIN
+
+API:
+GET  /api/products/search?q=  (KRITINIS! Ieško pagal code/barcode/name)
+POST /api/transactions (Reikia PIN!)
+POST /api/auth/verify-pin
+
+DEMO:
+Login: specvatas_user / spec123 / PIN: 1234
+Produktai: 0010006 (Kabelis YDYP 3x1.5, Barkodas: 1524544204585)
+
+SĖKMĖS KRITERIJAI:
+✅ 10 prekių per 20 sekundžių
+✅ Barkodų skaneriai veikia (= klaviatūra!)
+✅ PIN 100% reliable
+✅ Visi tekstai lietuvių kalba
+✅ Responsive
+
+SVARBIAUSIAS KLAUSIMAS: "Ar tai padaro įvedimą greitesnį?"
+Jei TAIP → Daryk. Jei NE → Nedaryk.
+
+GREITIS > Funkcionalumas > Dizainas
+
+PRADĖK NUO: Backend setup → Products search API → Ultra greitas įvedimas komponento
